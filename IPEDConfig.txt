@@ -9,7 +9,7 @@ indexTemp = default
 # Habilite caso indexTemp esteja em disco SSD. Nesse caso, são feitas otimizações que podem reduzir
 # o tempo de processamento em até 60%: o número de merge threads do índice é aumentado e 
 # são utilizados arquivos temporários para evitar múltiplas leituras/descompactações dos itens.
-indexTempOnSSD = false
+indexTempOnSSD = true
 
 # Habilite caso a pasta de saída -o esteja em disco SSD. Só tem efeito em processamentos com a opção --append.
 outputOnSSD = false
@@ -27,15 +27,15 @@ kffDb = /var/lib/kff/kff.db
 # Diretório contendo a base de hashes do LED. Caso configurado, os arquivos com hashes
 # existentes na base são adicionados a uma categoria "Hash com Alerta (PI)"
 # Necessário utilizar hash md5 ou sha-1.
-ledWkffPath = /var/lib/led/V1.21.00/pedo/wkff
+ledWkffPath = /var/lib/led/V1.21.01/pedo/wkff
 
 # Arquivo de dados utilizado pelo DIE (Detecção de Imagens Explícitas). 
 # Caso configurado, para cada imagem cria os atributos "scoreNudez" (1 a 1000) e classeNudez (1 a 5) para ordenação e/ou filtro.
 # Necessário apontar para arquivo de dados presente no LED versão 1.21 ou superior.
-ledDie = /var/lib/led/V1.21.00/pedo/die/rfdie.dat
+ledDie = /var/lib/led/V1.21.01/pedo/die/rfdie.dat
 
 # Exclui do restante do processamento e do caso arquivos ignoráveis conforme base de hashes.
-excludeKffIgnorable = false
+excludeKffIgnorable = true
 
 # Ignora/descarta arquivos duplicados do restante do processamento e do caso.
 # Pode agilizar bastante o processamento de casos com backups. Necessita habilitar o cálculo de hash.
@@ -65,25 +65,25 @@ indexUnknownFiles = true
 # Habilita o OCR em imagens e PDFs digitalizados. Pode aumentar consideravelmente o tempo de processamento.
 # Os resultados dependem da qualidade e resolução das imagens e do tamanho e tipo das fontes utilizadas.
 # Opções avançadas do OCR, como o caminho do Tesseract no Linux, podem ser alteradas em conf/AdvancedConfig.txt
-enableOCR = false
+enableOCR = true
 
 # Adiciona e processa áreas não alocadas de imagens via sleuthkit
-addUnallocated = false
+addUnallocated = true
 
 # Indexa o espaço não alocado adicionado. Necessário habilitar "addUnallocated" e "indexUnknownFiles".
-indexUnallocated = false
+indexUnallocated = true
 
 # Habilita o carving. Necessário habilitar "addUnallocated" para vasculhar áreas não alocadas.
 # Por padrão o carving é executado sobre quase todos os itens do caso. Os tipos de arquivo a vasculhar
 # e a recuperar, podem ser configurados em conf/CarvingConfig.txt
-enableCarving = false
+enableCarving = true
 
 # Habilita carving que recupera arquivos conhecidos da base do LED baseado no início (64K) do arquivo.
 # Necessário habilitar "addUnallocated" e configurar "ledWkffPath". 
-enableKFFCarving = false
+enableKFFCarving = true
 
 # Habilita carving específico de arquivos known.met do e-Mule. Necessário habilitar "addUnallocated". 
-enableKnownMetCarving = false
+enableKnownMetCarving = true
 
 # Habilita a geração de miniaturas das imagens durante o processamento.
 # Pode deixar o processamento bem mais lento, porém torna a visualização na galeria muito rápida.
