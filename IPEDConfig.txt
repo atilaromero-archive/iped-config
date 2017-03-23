@@ -27,7 +27,7 @@ kffDb = /var/lib/kff/kff.db
 # Diretório contendo a base de hashes do LED. Caso configurado, os arquivos com hashes
 # existentes na base são adicionados a uma categoria "Hash com Alerta (PI)"
 # Necessário utilizar hash md5 ou sha-1.
-ledWkffPath = /var/lib/led/V1.22.01/pedo/wkff
+ledWkffPath = /var/lib/led/V1.23.00/pedo/wkff
 
 # Arquivo de dados utilizado pelo DIE (Detecção de Imagens Explícitas). 
 # Caso configurado, para cada imagem cria os atributos "scoreNudez" (1 a 1000) e classeNudez (1 a 5) para ordenação e/ou filtro.
