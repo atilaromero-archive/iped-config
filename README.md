@@ -31,7 +31,7 @@ docker-compose run --rm iped bash
 docker-compose exec iped bash
 ```
 
- # Interface gráfica
+## Interface gráfica
 
 Em geral o /tmp/.X11-unix compartilhado e o -e DISPLAY, resolvem.
 Mas pode ser necessário executar:
