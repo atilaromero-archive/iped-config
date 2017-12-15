@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  iped:
+    image: deepcase/iped:debian-3.12.4-NIOFS-2
+    working_dir: $PWD
+    volumes:
+      - ../:$PWD/..
+      - ./:/usr/local/src/iped/iped/target/release/conf/
+      - /tmp/:${TMP-/tmp/}
+      - /tmp/.X11-unix/:/tmp/.X11-unix/
+    environment:
+      - DISPLAY
+      - GDK_BACKEND
+      - IMAGE=$IMAGE
+      - OUTPUT=${OUTPUT-../IPED}
+      - Xmx=${Xmx-100G}
+    command: bash -xc 'java -Djava.awt.headless=true -Xmx$$Xmx -jar /root/iped/iped.jar -d $$IMAGE -o $$OUTPUT --nologfile --nogui --portable'
