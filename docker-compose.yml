@@ -7,7 +7,7 @@ services:
     volumes:
       - ../:$PWD/..
       - ./:/usr/local/src/iped/iped/target/release/conf/
-      - /tmp/:${TMP-/tmp/}
+      - ${TMP-/tmp/}:/tmp/
       - /tmp/.X11-unix/:/tmp/.X11-unix/
     environment:
       - DISPLAY

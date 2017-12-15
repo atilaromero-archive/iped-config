@@ -18,6 +18,7 @@ IMAGE=../suaimagem.dd docker-compose up
 ## Variáveis de ambiente
 - IMAGE: caminho da imagem a ser processada
 - OUTPUT: define a saída do processamento do IPED; default: ../IPED
+- TMP: pasta tmp; default: /tmp
 - Xmx: máximo de memória para a JVM; default: 100G
 
 ## Execução de comandos
