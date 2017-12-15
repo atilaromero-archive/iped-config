@@ -1,8 +1,9 @@
 version: '2.1'
 services:
   iped:
-    image: deepcase/iped:debian-3.12.4-NIOFS-2
+    image: deepcase/iped:debian-3.12.4-NIOFS-4
     working_dir: $PWD
+    user: $UID
     volumes:
       - ../:$PWD/..
       - ./:/usr/local/src/iped/iped/target/release/conf/
@@ -14,4 +15,4 @@ services:
       - IMAGE=$IMAGE
       - OUTPUT=${OUTPUT-../IPED}
       - Xmx=${Xmx-100G}
-    command: bash -xc 'java -Djava.awt.headless=true -Xmx$$Xmx -jar /root/iped/iped.jar -d $$IMAGE -o $$OUTPUT --nologfile --nogui --portable'
+    command: bash -xc 'mkdir -p "$$OUTPUT" && java -Djava.awt.headless=true -Xmx"$$Xmx" -jar /iped/iped.jar -d "$$IMAGE" -o "$$OUTPUT" --nologfile --nogui --portable | tee -a "$$OUTPUT"/IPED.log'
