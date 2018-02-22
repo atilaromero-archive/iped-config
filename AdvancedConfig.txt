@@ -44,10 +44,10 @@ extraCharsToIndex =
 # Desabilite apenas em casos excepcionais para gerar um melhor dicionário para quebra de senhas.
 convertCharsToLowerCase = true
 
-# Não re-processa hard links apontando para itens já processados. Os hard links são adicionados ao caso,
+# Não re-processa hard links HFS+ apontando para itens já processados. Os hard links são adicionados ao caso,
 # porém seu conteúdo não é processado (indexado, expandido, carveado, etc).
 # Otimiza consideravelmente processamento de imagens HFS+ contendo milhares de hard links (time machines).
-ignoreHardLinks = false
+ignoreHardLinks = true
 
 # Configure caso queira ignorar arquivos orphans com base no seu tamanho.
 # Em raros casos podem ser recuperados pelo sleuthkit de milhares a milhões de orphans corrompidos gigantes, 
@@ -62,6 +62,10 @@ unallocatedFragSize = 1073741824
 # específico são divididos em fragmentos de 10MB antes de serem indexados, facilitando o destaque de hits e a exportação 
 # de trechos com hits de itens grandes como pagefile, vss, etc
 minItemSizeToFragment = 104857600
+
+# Tamanho (bytes) de divisão do texto extraído dos itens antes da indexação. Inclui todos os itens,
+# não apenas os indexados via strings. Isso evita OutOfMemory na indexação de itens com texto extraído mto grande. 
+textSplitSize = 100000000
 
 ########################################################################
 # Configurações OCR
@@ -88,12 +92,20 @@ pdfToImgResolution = 250
 maxPDFTextSize2OCR = 100
 
 # Biblioteca para conversão de PDFs para imagem antes do OCR.
-# Valores possíveis: pdfbox (mais rápido) ou icepdf (teoricamente mais estável)
+# Valores possíveis: pdfbox ou icepdf (geralmente mais rápido)
 pdfToImgLib = icepdf
+
+# Realiza a conversão de PDFs para imagem em outro processo, isolando OutOfMemoryErrors
+# e uso de CPU por threads desconectadas. Mais estável, porém torna o OCR mais lento.
+externalPdfToImgConv = false
+
+# Memória heap máxima a utilizar POR WORKER durante conversão externa de PDFs p/ imagem.
+externalConvMaxMem = 512M
 
 # Processa imagens embutidas em PDFs. Necessário para extrair imagens de PDFs caso sejam expandidos.
 # Caso habilitado, o OCR é aplicado nas imagens embutidas ao invés das imagens geradas pela renderização de cada página.
-# Às vezes as imagens ficam fragmentadas nos PDFs, podendo cortar palavras ou linhas. Nesse caso essa opção pode ser prejudicial ao OCR. 
+# Às vezes as imagens ficam fragmentadas nos PDFs, podendo cortar palavras ou linhas. Nesse caso essa opção pode ser prejudicial ao OCR.
+# Além disso, com essa opção o OCR de imagens jbig2 em PDFs não funciona, pois o tesseract não suporta esse formato. 
 processImagesInPDFs = false
 
 ########################################################################

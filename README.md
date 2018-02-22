@@ -7,7 +7,7 @@
 
 - Faça um clone do repositório do iped-config em um diretório pai da imagem a ser processada (ou copie o conteúdo do repositório de alguma forma):
 ```
-git clone https://github.com/deepcase/iped-config.git
+git clone https://github.com/iped-docker/iped-config.git
 ```
 - Se necessário, altere as configurações do processamento, editando os arquivos da pasta iped-config recém criada.
 - Dentro da pasta iped-config, execute:

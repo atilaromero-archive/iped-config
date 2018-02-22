@@ -1,18 +1,19 @@
 version: '2.1'
 services:
   iped:
-    image: deepcase/iped:debian-3.12.4-NIOFS-4
-    working_dir: $PWD
+    image: ipeddocker/iped:3.13.5
     user: $UID
+    working_dir: $PWD
     volumes:
       - ../:$PWD/..
       - ./:/usr/local/src/iped/iped/target/release/conf/
-      - ${TMP-/tmp/}:/tmp/
+      - /tmp/:${TMP-/tmp/}
       - /tmp/.X11-unix/:/tmp/.X11-unix/
     environment:
+      - HTTP_PROXY
       - DISPLAY
       - GDK_BACKEND
-      - IMAGE=$IMAGE
-      - OUTPUT=${OUTPUT-../IPED}
+      - IMAGE=${IMAGE-IMAGE}
+      - OUTPUT=${OUTPUT-IPED}
       - Xmx=${Xmx-100G}
-    command: bash -xc 'mkdir -p "$$OUTPUT" && java -Djava.awt.headless=true -Xmx"$$Xmx" -jar /iped/iped.jar -d "$$IMAGE" -o "$$OUTPUT" --nologfile --nogui --portable | tee -a "$$OUTPUT"/IPED.log'
+    command: bash -xc 'java -Djava.awt.headless=true -Xmx$$Xmx -jar /iped/iped.jar -d $$IMAGE -o $$OUTPUT --nologfile --nogui --portable'
